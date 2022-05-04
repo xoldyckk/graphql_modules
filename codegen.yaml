@@ -1,0 +1,17 @@
+overwrite: true
+schema: "src/graphql/modules/**/*.ts"
+generates:
+  ./src/graphql/modules/:
+    preset: graphql-modules
+    presetConfig:
+      baseTypesPath: ./generatedSchemaTypes.ts # Where to create the complete schema types
+      filename: generatedModuleTypes.ts # Where to create each module types
+    plugins:
+      - typescript
+      - typescript-resolvers
+    config:
+      contextType: "GraphQLModules.Context"
+      mappers:
+        User: "@prisma/client/index.d#User"
+        Post: "@prisma/client/index.d#Post"
+      inputMaybeValue: undefined | T
